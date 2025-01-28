@@ -3,9 +3,10 @@ title: 'Introducción a C# Tema 1: Sintaxis básica y estructura de un programa'
 description: 'Sintaxis básica y estructura de un programa en C#.'
 date: '2025-01-22'
 draft: false
-category: 'C#'
+category: 'CSharp'
 author: 04-angel-m
 ---
+
 ## Tabla de Contenidos
 
 - [Tabla de Contenidos](#tabla-de-contenidos)
@@ -29,7 +30,7 @@ author: 04-angel-m
 
 Un clasico para comenzar, un hola mundo , en su version evil, ahora mismo podemos tener dos formas de realizarla.
 Esta sera la forma en que muchas veces se hara:
-  
+
 ```csharp
 //En las nuevas versiones de .net usando Top-level statements
 Console.WriteLine("Goobye, World");
@@ -39,13 +40,13 @@ En versiones anteriores a .Net 6 y C#9 se realiza asi, un clasico y en un moment
 
 ```csharp
 // Sin usar Top-level statements
-using System; 
+using System;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("¡Goobye, world!"); 
+        Console.WriteLine("¡Goobye, world!");
     }
 }
 ```
@@ -73,7 +74,7 @@ bool esActivo = true;
 
 Tambien se cuentan con los operadores basicos como son:
 
-- Aritméticos: +, -, *, /, %.
+- Aritméticos: +, -, \*, /, %.
 - Relacionales: ==, !=, >, <, >=, <=.
 - Lógicos: &&, ||, !.
 
@@ -89,7 +90,7 @@ Una de las características más destacadas de C# es LINQ (Language Integrated Q
 - Tablas de bases de datos.
 - Estructuras como XML o JSON.
 - APIs de almacenamiento en la nube.
-  
+
 Con LINQ, puedes aprender un solo conjunto de sintaxis y aplicarlo en cualquier contexto de datos.
 
 Por ejemplo, para encontrar los productos con un precio mayor a $50:
