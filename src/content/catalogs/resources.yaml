@@ -1,0 +1,31 @@
+- id: java-res
+  title: Java
+  description: Guías, tutoriales, libros y todo recurso para aprender y mejorar con Java.
+  url: https://github.com/eliasvelazquezdev/share-it-resources/tree/main/lenguajes/java
+  date: '2025-01-14'
+  tags:
+    - dev
+    - java
+- id: css-res
+  title: CSS
+  description: Guías, tutoriales, libros y todo recurso para aprender y mejorar en CSS.
+  url: https://github.com/eliasvelazquezdev/share-it-resources/tree/main/lenguajes/css
+  date: '2025-01-15'
+  tags:
+    - css
+- id: js-res
+  title: JavaScript
+  description: Descubre proyectos, tutoriales y recursos para aprender JavaScript.
+  url: https://github.com/eliasvelazquezdev/share-it-resources/tree/main/lenguajes/javascript
+  date: '2024-12-12'
+  tags:
+    - dev
+    - js
+- id: py-res
+  title: Python
+  description: Descubre proyectos, tutoriales y recursos para aprender Python.
+  url: https://github.com/eliasvelazquezdev/share-it-resources/tree/main/lenguajes/python
+  date: '2024-12-10'
+  tags:
+    - dev
+    - py

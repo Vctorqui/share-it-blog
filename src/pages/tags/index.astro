@@ -1,29 +1,48 @@
 ---
-import TagCard from '@components/TagCard.astro'
-import Layout from '@layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-// import { resources } from 'src/utils/resources'
-import { resources as allResources } from 'src/utils/resources'
-import { getAllTags } from 'src/utils/tags'
+import TagCard from "@components/TagCard.astro";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type TagCount from "@models/TagCount"
 
-// const resources = await getCollection('resources', ({ data }) => !data.draft)
-const articles = await getCollection('articles', ({ data }) => !data.draft)
-const tags = getAllTags(
-  allResources.map((resource) => ({
-    ...resource,
-    data: { ...resource, type: 'resource' as const },
-    slug: resource.slug,
-  })),
-  articles
-)
+const DEFAULT_COUNT = Object.freeze<TagCount>({ articleCount: 0, resourceCount: 0, totalCount: 0})
+
+const articles = await getCollection("articles", ({ data }) => !data.draft);
+const resources = await getCollection("resources");
+const tags = await getCollection("tags");
+const tagCount = new Map<string, TagCount>();
+
+resources
+  .flatMap(r => r.data.tags)
+  .map(t => t.id)
+  .forEach((tagId) => {
+    const current = tagCount.get(tagId) || DEFAULT_COUNT;
+    tagCount.set(tagId, { ...current, resourceCount: current.resourceCount + 1, totalCount: current.totalCount + 1 });
+  });
+articles
+  .flatMap(a => a.data.tags)
+  .map(t => t.id)
+  .forEach((tagId) => {
+    const current = tagCount.get(tagId) || DEFAULT_COUNT;
+    tagCount.set(tagId, { ...current, articleCount: current.articleCount + 1, totalCount: current.totalCount + 1 });
+  });
+
 ---
 
-<Layout title='Tags | Share IT' showBackButton>
-  <h1 class='text-4xl font-bold text-center mb-8 text-white'>
+<Layout title="Tags | Share IT" showBackButton>
+  <h1 class="text-4xl font-bold text-center mb-8 text-white">
     Explorar por Tags
   </h1>
 
-  <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-    {tags.map((tag) => <TagCard name={tag.name} count={tag.count} />)}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      tags.map((tag) => (
+        <TagCard
+          id={tag.id}
+          name={tag.data.name}
+          description={tag.data.description}
+          count={tagCount.get(tag.id) || DEFAULT_COUNT}
+        />
+      ))
+    }
   </div>
 </Layout>

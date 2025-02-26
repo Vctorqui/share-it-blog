@@ -8,7 +8,9 @@
       "@layouts/*": ["src/layouts/*"],
       "@icons/*": ["src/icons/*"],
       "@lib/*": ["src/lib/*"],
-      "@types": ["src/types.ts"]
+      "@helpers/*": ["src/helpers/*"],
+      "@models/*": ["src/models/*"],
+      "@types": ["src/types.ts"],
     }
   }
 }

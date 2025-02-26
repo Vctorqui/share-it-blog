@@ -1,0 +1,25 @@
+# TODO: Should tags have some sort of icon?
+- id: csharp
+  name: C#
+  description: Artículos relacionados con C#.
+- id: css
+  name: CSS
+  description: Artículos relacionados con CSS.
+- id: data-engineering
+  name: Data Engineering
+  description: Artículos relacionados con Data Engineering.
+- id: dev
+  name: Desarrollo
+  description: Artículos relacionados con Desarrollo de software en general.
+- id: java
+  name: Java
+  description: Artículos relacionados con Java.
+- id: js
+  name: JavaScript
+  description: Artículos relacionados con JavaScript.
+- id: psychology
+  name: Psicología 
+  description: Artículos relacionados con psicología y productividad en IT.
+- id: py
+  name: Python 
+  description: Artículos relacionados con Python.

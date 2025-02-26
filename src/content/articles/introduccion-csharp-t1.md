@@ -3,7 +3,9 @@ title: 'Introducción a C# Tema 1: Sintaxis básica y estructura de un programa'
 description: 'Sintaxis básica y estructura de un programa en C#.'
 date: '2025-01-22'
 draft: false
-category: 'CSharp'
+tags: 
+    - dev
+    - csharp
 author: 04-angel-m
 ---
 

@@ -3,7 +3,9 @@ title: 'Sucesión de Fibonacci con JavaScript'
 description: 'Qué es la sucesión de Fibonacci y cómo podemos resolverla con Recursividad y el Bucle for.'
 date: '2024-04-30'
 draft: false
-category: 'JavaScript'
+tags: 
+  - dev
+  - js
 author: 01-victor-q
 ---
 

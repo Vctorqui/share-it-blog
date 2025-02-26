@@ -3,7 +3,8 @@ title: 'Data Engineering 1 - Introducción'
 description: '¿Qué es Data Engineering? ¿Qué hace un/a Data Engineer? ¿Qué conocimientos técnicos se necesitan? ¿Dónde capacitarse?'
 date: '2025-01-19'
 draft: false
-category: 'DataEngineering'
+tags: 
+    - data-engineering
 author: 02-elias-v
 ---
 

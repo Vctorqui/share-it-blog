@@ -1,5 +1,5 @@
 import { defineCollection, z, reference } from 'astro:content'
-import { glob } from 'astro/loaders'
+import { glob, file } from 'astro/loaders'
 
 const authorSchema = z.object({
   name: z.string(),
@@ -17,8 +17,23 @@ const articleSchema = z.object({
   description: z.string(),
   date: z.string().transform((str) => new Date(str + 'T00:00:00')),
   draft: z.boolean().default(false),
-  category: z.string(),
+  tags: z.array(reference("tags")),
   author: reference("authors"),
+})
+
+const tagSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string()
+})
+
+const resourceSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  url: z.string(),
+  date: z.string().transform((str) => new Date(str + 'T00:00:00')),
+  tags: z.array(reference("tags")),
 })
 
 const articles = defineCollection({
@@ -31,7 +46,19 @@ const authors = defineCollection({
   schema: authorSchema,
 })
 
+const tags = defineCollection({
+  loader: file("./src/content/catalogs/tags.yaml"),
+  schema: tagSchema
+})
+
+const resources = defineCollection({
+  loader: file("./src/content/catalogs/resources.yaml"),
+  schema: resourceSchema
+})
+
 export const collections = {
   articles,
-  authors
+  authors,
+  tags,
+  resources
 }

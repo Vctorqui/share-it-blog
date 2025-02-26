@@ -3,7 +3,8 @@ title: "Mis consejos para mejorar tu productividad como desarrollador"
 description: "Algunos consejos para mejorar tu productividad como desarrollador. Basados en libros y mi experiencia personal."
 date: "2025-01-23"
 draft: false
-category: "Productividad"
+tags:
+  - psychology
 author: 03-francisco-l
 ---
 

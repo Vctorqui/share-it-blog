@@ -1,28 +1,29 @@
 ---
+import { type CollectionEntry } from 'astro:content'
+import type TagCount from '@models/TagCount'
+
 interface Props {
-  name: string
-  count: {
-    total: number
-    articles: number
-    resources: number
-  }
+  id: string,
+  name: string,
+  description: string,
+  count: TagCount
 }
 
-const { name, count } = Astro.props
+const { id, name, count } = Astro.props
 ---
 
 <a
-  href={`/tags/${name.toLowerCase()}`}
+  href={`/tags/${id}`}
   class='block p-6 bg-gray-800 rounded-lg border border-primary hover:border-[#83D6E7] transition-colors'
 >
   <h2 class='text-2xl font-bold text-primary mb-2'>{name}</h2>
   <div class='text-gray-400 space-y-1'>
     <p class='font-medium'>
-      {count.total} elemento{count.total !== 1 ? 's' : ''}
+      {count.totalCount} elemento{count.totalCount !== 1 ? 's' : ''}
     </p>
     <div class='text-sm'>
-      <p>{count.articles} artículo{count.articles !== 1 ? 's' : ''}</p>
-      <p>{count.resources} recurso{count.resources !== 1 ? 's' : ''}</p>
+      <p>{count.articleCount} artículo{count.articleCount !== 1 ? 's' : ''}</p>
+      <p>{count.resourceCount} recurso{count.resourceCount !== 1 ? 's' : ''}</p>
     </div>
   </div>
 </a>

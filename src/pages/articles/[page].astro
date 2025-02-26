@@ -1,8 +1,9 @@
 ---
-import { getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import Pagination from '@components/Pagination.astro'
 import ContentCard from '@components/ContentCard.astro'
+import { getTagNamesByEntries } from '@helpers/tagHelper'
 
 export async function getStaticPaths({
   paginate,
@@ -27,13 +28,12 @@ const {
   currentPage,
   lastPage,
 } = page as {
-  data: Array<{
-    data: { title: string; description: string; category: string; date: Date }
-    id: string
-  }>
+  data: Array<CollectionEntry<"articles">>
   currentPage: number
   lastPage: number
 }
+
+const tagNamesByArticle = await getTagNamesByEntries(articles);
 ---
 
 <Layout title='Artículos | Share IT' showBackButton>
@@ -58,7 +58,7 @@ const {
             additionalClass='h-[250px]'
             title={article.data.title}
             description={article.data.description}
-            category={article.data.category}
+            tags={tagNamesByArticle.get(article.id)}
             date={article.data.date}
             href={`/articles/${article.id}`}
           />

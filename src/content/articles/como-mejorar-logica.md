@@ -3,7 +3,8 @@ title: '驴C贸mo mejorar tu l贸gica de programaci贸n y no llorar en el intento?馃
 description: 'Consejos de c贸mo mejorar nuestra l贸gica, pero tambi茅n c贸mo enfrentarnos a esos problemas teniendo en cuenta otros aspectos.'
 date: '2024-11-21'
 draft: false
-category: 'Desarrollo'
+tags:
+  - dev
 author: 01-victor-q
 ---
 
