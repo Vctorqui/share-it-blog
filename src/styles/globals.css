@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import './typography.css';
+
+
+:root {
+    --primary: #368beb;
+    --secondary: #83D6E7;
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%);
+}
+
+@theme inline {
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+    --color-accent: var(--accent);
+    --color-accent-light: var(--accent-light);
+    --color-accent-dark: var(--accent-dark);
+    --color-accent-gradient: var(--accent-gradient);
+}
+
+@layer base {
+    html {
+        font-family: system-ui, sans-serif;
+        background: #13151a;
+        color: #ffffff;
+    }
+
+    code {
+        font-family:
+            Menlo,
+            Monaco,
+            Lucida Console,
+            Liberation Mono,
+            DejaVu Sans Mono,
+            Bitstream Vera Sans Mono,
+            Courier New,
+            monospace;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #ffffff;
+    }
+
+    p {
+        color: #e5e7eb;
+        margin-bottom: 0;
+    }
+
+    a {
+        color: #a78bfa;
+    }
+
+
+    a:hover {
+        color: #e5e7eb;
+    }
+
+    b,
+    strong {
+        color: #b5bafd;
+    }
+}
+
+
+/*Card title hover */
+.card-title {
+    transition-property: color, background-color, border-color,
+        text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.card-share-it:hover .card-title {
+    color: secondary
+}
