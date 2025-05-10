@@ -1,30 +1,30 @@
 ---
-import CollaboratorCard from '@components/CollaboratorCard.astro'
-import { getTagNamesByEntry } from '@helpers/tagHelper'
-import Layout from '@layouts/Layout.astro'
-import { getCollection, getEntry, render } from 'astro:content'
-import { formatDate } from 'src/utils/dates'
+import CollaboratorCard from "@components/CollaboratorCard.astro";
+import { getTagNamesByEntry } from "@helpers/tagHelper";
+import Layout from "@layouts/Layout.astro";
+import { getCollection, getEntry, render } from "astro:content";
+import { formatDate } from "src/utils/dates";
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles')
+  const articles = await getCollection("articles");
   return articles.map((article) => ({
     params: { slug: article.id },
     props: { article },
-  }))
+  }));
 }
 
-const { article } = Astro.props
-const author = await getEntry(article.data.author)
+const { article } = Astro.props;
+const author = await getEntry(article.data.author);
 const tagNames = await getTagNamesByEntry(article);
-const { Content } = await render(article)
+const { Content } = await render(article);
 ---
 
 <Layout title={article.data.title} showBackButton>
-  <article class='prose lg:prose-xl mx-auto prose-invert'>
-    <header class='flex flex-col items-start gap-2'>
-      <div class='flex flex-col items-start'>
-        <h1 class='text-4xl font-bold text-white'>{article.data.title}</h1>
-        <time class='text-sm text-gray-400 mt-2'
+  <article class="prose lg:prose-xl mx-auto prose-invert">
+    <header class="flex flex-col items-start gap-2">
+      <div class="flex flex-col items-start">
+        <h1 class="text-4xl font-bold text-white">{article.data.title}</h1>
+        <time class="text-sm text-gray-400 mt-2"
           >{formatDate(article.data.date.toISOString())}</time
         >
       </div>
@@ -37,9 +37,94 @@ const { Content } = await render(article)
           ))
         }
       </div>
-      <p class='text-gray-300 mt-2'>{article.data.description}</p>
+      <p class="text-gray-300 mt-2">{article.data.description}</p>
     </header>
-    <Content />
+    <div id="main-content">
+      <Content />
+    </div>
     <CollaboratorCard {...author.data} />
   </article>
 </Layout>
+
+<script is:inline data-astro-rerun>
+  /** Crear un indicador de progreso */
+  function createProgressBar() {
+    // Crear el main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full";
+
+    // Crear el progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-secondary";
+    progressBar.id = "myBar";
+
+    // Insertar el progress bar al progress container
+    progressContainer.appendChild(progressBar);
+
+    // Insertar el progress container al dom
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Actualizar el indicador del progreso cuando el usuario hace scroll */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Crear e insertar copy buttons en los bloques de codigo */
+  function attachCopyButtons() {
+    const mainContent = document.querySelector("#main-content");
+    const copyButtonLabel = mainContent?.dataset?.copyString ?? "copiar";
+
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.className =
+        "copy-code absolute right-3 -top-3 rounded bg-secondary/20 backdrop-blur-sm px-2 py-1 text-xs leading-4 text-primary cursor-pointer font-bold";
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // feedback visual texto copiado
+      button.innerText = mainContent?.dataset?.copiedString ?? "copiado";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+</script>

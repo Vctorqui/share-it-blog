@@ -1,158 +1,61 @@
 ---
-import Footer from '@components/Footer.astro'
-import Header from '@components/Header.astro'
-import { ClientRouter } from 'astro:transitions'
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import { ClientRouter } from "astro:transitions";
+import "../styles/globals.css";
 
 interface Props {
-  title: string
-  showBackButton?: boolean
+  title: string;
+  showBackButton?: boolean;
 }
 
-const { title, showBackButton = false } = Astro.props
+const { title, showBackButton = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='UTF-8' />
+    <meta charset="UTF-8" />
     <meta
-      name='description'
-      content='Un rincón para compartir los conocimientos y recursos que me han guiado y ayudado, tanto a mí como a otros desarrolladores, en nuestro recorrido'
+      name="description"
+      content="Un rincón para compartir los conocimientos y recursos que me han guiado y ayudado, tanto a mí como a otros desarrolladores, en nuestro recorrido"
     />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/share-it-icon.png' />
-    <meta name='generator' content={Astro.generator} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/share-it-icon.png" />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ClientRouter />
   </head>
-  
-  <body class='bg-gray-900 min-h-screen flex flex-col'>
-    
+
+  <body class="bg-gray-900 min-h-screen flex flex-col">
     <Header />
-  
-    <main class='flex-grow container mx-auto px-4 py-8 max-w-4xl'>
-      
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
       {
         showBackButton && (
-        <button
-      onclick="javascript:history.back()"
-      class="group inline-flex items-center gap-2 mb-4 text-secondary hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-gray-800 rounded-md px-3 py-2"
-      aria-label="Go back to previous page"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 transform transition-transform duration-200 group-hover:-translate-x-1"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <span class="font-medium">Volver</span>
-    </button>
+          <button
+            onclick="javascript:history.back()"
+            class="cursor-pointer group inline-flex items-center gap-2 mb-4 text-secondary hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-gray-800 rounded-md px-3 py-2"
+            aria-label="Go back to previous page"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 transform transition-transform duration-200 group-hover:-translate-x-1"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span class="font-medium">Volver</span>
+          </button>
         )
       }
       <slot />
     </main>
     <Footer />
-
   </body>
-  
 </html>
-
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-    color: #ffffff;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: #ffffff;
-  }
-  p {
-    color: #e5e7eb;
-    margin-bottom: 0;
-  }
-  a {
-    color: #a78bfa;
-  }
-  a:hover {
-    color: #e5e7eb;
-  }
-  b,
-  strong {
-    color: #b5bafd;
-  }
-
-  /* Estilos para el contenido markdown */
-
-  .prose h2 {
-    @apply text-2xl font-bold mt-8 mb-4 text-[#8b96fa];
-  }
-  .prose h3 {
-    @apply text-xl font-semibold mt-4 mb-3 text-secondary;
-  }
-  .prose p {
-    @apply mb-4 leading-relaxed text-gray-300;
-  }
-  .prose ul {
-    @apply list-disc list-inside my-2 text-gray-300;
-  }
-  .prose ol {
-    @apply list-decimal list-inside mb-4 text-gray-300 pr-4;
-  }
-  .prose code {
-    @apply px-2 py-1 rounded text-gray-200;
-  }
-  .prose pre {
-    @apply bg-gray-700 p-4 rounded-lg mt-2 mb-4 overflow-x-auto text-gray-200;
-  }
-  .prose blockquote {
-    @apply border-l-4 border-violet-400 pl-4 italic text-gray-400;
-  }
-  .prose hr {
-    @apply border-t border-gray-700 my-4;
-  }
-
-  /*Card title hover */
-  .card-title {
-    transition-property: color, background-color, border-color,
-      text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-  }
-  .card-share-it:hover .card-title {
-    color:secondary
-  }
-</style>

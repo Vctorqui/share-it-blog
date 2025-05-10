@@ -18,28 +18,28 @@ const EmblaCarousel = (props) => {
     <section className='embla'>
       <div className='embla__viewport' ref={emblaRef}>
         <div className='embla__container'>
-          {slides.map((item) => (
-            <div className='embla__slide' key={item}>
+          {slides.map((item, i) => (
+            <div className='embla__slide' key={i}>
               <div className='embla__slide__number bg-gray-800 rounded-lg  items-center text-center px-2'>
                 <img
                   src={item.avatar}
                   alt={item.name}
-                  class='w-32 h-32 rounded-full mb-4 object-cover border-4 border-[#83D6E7]'
+                  className='w-32 h-32 rounded-full mb-4 object-cover border-4 border-[#83D6E7]'
                 />
-                <div class='flex flex-col items-center mb-2'>
-                  <p class='text-lg font-bold text-white'>{item.name}</p>
-                  <span class='text-sm font-bold text-secondary'>
+                <div className='flex flex-col items-center mb-2'>
+                  <p className='text-lg font-bold text-white'>{item.name}</p>
+                  <span className='text-sm font-bold text-secondary'>
                     {item.role}
                   </span>
-                  <span class='text-gray-400 text-sm'>{item.about}</span>
+                  <span className='text-gray-400 text-sm'>{item.about}</span>
                 </div>
-                <div class='flex gap-4'>
+                <div className='flex gap-4'>
                   {item.github && (
                     <a
                       href={item.github}
                       target='_blank'
                       rel='noopener noreferrer'
-                      class='text-gray-400 hover:text-secondary'
+                      className='text-gray-400 hover:text-secondary'
                       aria-label='GitHub profile'
                     >
                       <GithubIcon />
@@ -50,7 +50,7 @@ const EmblaCarousel = (props) => {
                       href={item.linkedin}
                       target='_blank'
                       rel='noopener noreferrer'
-                      class='text-gray-400 hover:text-secondary'
+                      className='text-gray-400 hover:text-secondary'
                       aria-label='LinkedIn profile'
                     >
                       <LinkedinIcon />
@@ -61,7 +61,7 @@ const EmblaCarousel = (props) => {
                       href={item.website}
                       target='_blank'
                       rel='noopener noreferrer'
-                      class='text-gray-400 hover:text-secondary'
+                      className='text-gray-400 hover:text-secondary'
                       aria-label='Personal website'
                     >
                       <WebsiteIcon />
@@ -72,7 +72,7 @@ const EmblaCarousel = (props) => {
                       href={item.twitter}
                       target='_blank'
                       rel='noopener noreferrer'
-                      class='text-gray-400 hover:text-secondary'
+                      className='text-gray-400 hover:text-secondary'
                       aria-label='Personal website'
                     >
                       <TwitterIcon />
@@ -83,7 +83,7 @@ const EmblaCarousel = (props) => {
                       href={item.instagram}
                       target='_blank'
                       rel='noopener noreferrer'
-                      class='text-gray-400 hover:text-secondary'
+                      className='text-gray-400 hover:text-secondary'
                       aria-label='Personal website'
                     >
                       <InstagramIcon />
